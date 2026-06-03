@@ -316,6 +316,86 @@
             height: 100%;
             border: none;
         }
+
+        /* Rotating Quotes */
+        .quotes-container {
+            height: 30px;
+            margin-bottom: 2rem;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .quote {
+            position: absolute;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .quote.active {
+            opacity: 1;
+        }
+
+        /* Pump Button */
+        .pump-btn-container {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pump-btn {
+            background: linear-gradient(135deg, #14F195 0%, #9945FF 100%);
+            color: #0b0f19;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 0 0 20px rgba(20, 241, 149, 0.5);
+            transition: all 0.1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pump-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(20, 241, 149, 0.8);
+        }
+
+        .pump-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Pump Animations */
+        .pump-item {
+            position: fixed;
+            bottom: -50px;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 1000;
+            animation: shootUp 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes shootUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -331,6 +411,14 @@
         
         <h1><img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana Logo" style="width: 50px; vertical-align: middle; margin-right: 15px;">Solana Bank</h1>
         <p class="subtitle">Exclusive rewarding system for our loyal holders. Maintain a balance of at least <span class="highlight">200,000 tokens</span> to automatically qualify for continuous SOL drops. Let's pump it up and get back into the peak bull run!</p>
+
+        <div class="quotes-container">
+            <div class="quote active">"We are so back."</div>
+            <div class="quote">"Generational wealth incoming."</div>
+            <div class="quote">"You don't have enough SOL."</div>
+            <div class="quote">"Bear market canceled."</div>
+            <div class="quote">"Up Only."</div>
+        </div>
 
         <div class="timer-container">
             <div class="timer-label">Next Airdrop Wave In</div>
@@ -349,6 +437,10 @@
             <div class="winners-list" id="winnersList">
                 <!-- Winners will be injected here via JavaScript -->
             </div>
+        </div>
+
+        <div class="pump-btn-container">
+            <button class="pump-btn" onclick="pumpSolana()">PUMP SOLANA</button>
         </div>
 
         <div class="dexscreener-box">
@@ -471,11 +563,58 @@
             }
         }
 
+        // Rotating Quotes Logic
+        function startQuotes() {
+            const quotes = document.querySelectorAll('.quote');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                quotes[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % quotes.length;
+                quotes[currentIndex].classList.add('active');
+            }, 3000); // Rotate every 3 seconds
+        }
+
+        // Pump Solana Button Logic
+        function pumpSolana() {
+            const items = ['🚀', '📈', '🟢', 'WAGMI', 'SEND IT', 'LFG', '💰', 'SOL'];
+            const container = document.body;
+
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.className = 'pump-item';
+                    
+                    // Randomize content
+                    el.innerText = items[Math.floor(Math.random() * items.length)];
+                    
+                    // Randomize position and styling
+                    el.style.left = `${Math.random() * 100}vw`;
+                    el.style.fontSize = `${Math.random() * 2 + 1.5}rem`;
+                    
+                    // If it's text, give it a glowing color
+                    if (el.innerText.length > 2) {
+                        el.style.color = Math.random() > 0.5 ? '#14F195' : '#9945FF';
+                        el.style.fontWeight = 'bold';
+                        el.style.textShadow = '0 0 10px currentColor';
+                    }
+
+                    container.appendChild(el);
+
+                    // Clean up after animation
+                    setTimeout(() => {
+                        el.remove();
+                    }, 2000);
+                }, i * 50); // Stagger the spawns
+            }
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             startTimer();
             createParticles();
             generateWinners();
+            startQuotes();
         });
     </script>
 </body>
