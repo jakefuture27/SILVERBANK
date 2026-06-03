@@ -427,8 +427,15 @@
 
         <div class="contract-box">
             <div class="contract-label">Official Contract Address</div>
-            <div class="contract-address-wrapper" style="justify-content: center;">
-                <div class="contract-address" style="color: var(--accent); font-weight: 800; letter-spacing: 2px;">TBA - LAUNCHING SOON</div>
+            <div class="contract-address-wrapper">
+                <div class="contract-address" id="contractAddress">4SwvknewUsBAAEXToyFTAhqjYKoTFJvpjZkBqby3pump</div>
+                <button class="copy-btn" onclick="copyContract()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span id="copyText">Copy</span>
+                </button>
             </div>
         </div>
 
@@ -444,7 +451,7 @@
         </div>
 
         <div class="dexscreener-box">
-            <iframe src="https://dexscreener.com/solana/So11111111111111111111111111111111111111112?embed=1&theme=dark&trades=0&info=0"></iframe>
+            <iframe src="https://dexscreener.com/solana/4SwvknewUsBAAEXToyFTAhqjYKoTFJvpjZkBqby3pump?embed=1&theme=dark&trades=0&info=0"></iframe>
         </div>
     </div>
 
