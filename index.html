@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silver Bank Airdrop</title>
+    <title>Solana Bank Airdrop</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -12,9 +12,9 @@
             --bg-color: #0b0f19;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --silver-light: #e2e8f0;
-            --silver-dark: #94a3b8;
-            --accent: #38bdf8;
+            --silver-light: #14F195;
+            --silver-dark: #9945FF;
+            --accent: #14F195;
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
@@ -35,8 +35,8 @@
             align-items: center;
             justify-content: center;
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(148, 163, 184, 0.1), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.05), transparent 25%);
+                radial-gradient(circle at 15% 50%, rgba(153, 69, 255, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(20, 241, 149, 0.1), transparent 25%);
             overflow-x: hidden;
         }
 
@@ -73,7 +73,7 @@
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            background: linear-gradient(135deg, #14F195 0%, #9945FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -1px;
@@ -114,11 +114,11 @@
             font-size: 4rem;
             font-weight: 800;
             font-variant-numeric: tabular-nums;
-            background: linear-gradient(to right, #38bdf8, #e2e8f0);
+            background: linear-gradient(to right, #14F195, #9945FF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1;
-            text-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
+            text-shadow: 0 0 40px rgba(20, 241, 149, 0.3);
         }
 
         .contract-box {
@@ -329,8 +329,8 @@
             <div class="badge">Min. 200k Tokens Required</div>
         </div>
         
-        <h1>Silver Bank</h1>
-        <p class="subtitle">Exclusive rewarding system for our loyal holders. Maintain a balance of at least <span class="highlight">200,000 tokens</span> to automatically qualify for continuous drops.</p>
+        <h1><img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana Logo" style="width: 50px; vertical-align: middle; margin-right: 15px;">Solana Bank</h1>
+        <p class="subtitle">Exclusive rewarding system for our loyal holders. Maintain a balance of at least <span class="highlight">200,000 tokens</span> to automatically qualify for continuous SOL drops. Let's pump it up and get back into the peak bull run!</p>
 
         <div class="timer-container">
             <div class="timer-label">Next Airdrop Wave In</div>
@@ -462,8 +462,8 @@
                 // Truncate for display
                 const displayAddress = `${address.substring(0, 6)}...${address.substring(38)}`;
                 
-                // Random airdrop amount between 5k and 50k
-                const amount = Math.floor(Math.random() * 45000) + 5000;
+                // Random airdrop amount between 0.5 and 5 SOL
+                const amount = (Math.random() * 4.5 + 0.5).toFixed(2);
                 
                 const row = document.createElement('div');
                 row.className = 'winner-row';
@@ -471,7 +471,7 @@
                 
                 row.innerHTML = `
                     <div class="winner-address">${displayAddress}</div>
-                    <div class="winner-amount">+${amount.toLocaleString()} TOKENS</div>
+                    <div class="winner-amount">+${amount} SOL</div>
                 `;
                 
                 winnersList.appendChild(row);
