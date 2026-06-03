@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Bank Airdrop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --silver-light: #e2e8f0;
+            --silver-dark: #94a3b8;
+            --accent: #38bdf8;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(148, 163, 184, 0.1), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.05), transparent 25%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 3rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeUp 1s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Subtle glowing orb behind container */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(226, 232, 240, 0.03) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: var(--silver-light);
+            font-weight: 600;
+        }
+
+        .timer-container {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timer-label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .timer {
+            font-size: 4rem;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            background: linear-gradient(to right, #38bdf8, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            text-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
+        }
+
+        .contract-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contract-box:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .contract-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contract-address-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            gap: 1rem;
+        }
+
+        .contract-address {
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: var(--silver-light);
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: var(--silver-light);
+            color: var(--bg-color);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ambient floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.1;
+            pointer-events: none;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .timer { font-size: 3rem; }
+            .container { padding: 2rem 1.5rem; }
+            .contract-address-wrapper { flex-direction: column; text-align: center; }
+            .copy-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particles Background -->
+    <div id="particles"></div>
+
+    <div class="container">
+        <div class="badges">
+            <div class="badge">Live Airdrop Event</div>
+            <div class="badge">Min. 200k Tokens Required</div>
+        </div>
+        
+        <h1>Silver Bank</h1>
+        <p class="subtitle">Exclusive rewarding system for our loyal holders. Maintain a balance of at least <span class="highlight">200,000 tokens</span> to automatically qualify for continuous drops.</p>
+
+        <div class="timer-container">
+            <div class="timer-label">Next Airdrop Wave In</div>
+            <div class="timer" id="timerDisplay">05:00</div>
+        </div>
+
+        <div class="contract-box">
+            <div class="contract-label">Official Contract Address</div>
+            <div class="contract-address-wrapper">
+                <div class="contract-address" id="contractAddress">DFrJtsLeWc6EPUWtBJTCQaGFGsBXBi7kpbUB6R2vpump</div>
+                <button class="copy-btn" onclick="copyContract()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span id="copyText">Copy</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 5 Minutes in seconds
+        const AIRDROP_INTERVAL = 5 * 60;
+        
+        // Timer logic
+        function startTimer() {
+            // Check if there is a saved end time in localStorage
+            let endTime = localStorage.getItem('silverBankAirdropEnd');
+            
+            if (!endTime || parseInt(endTime) < Date.now()) {
+                // Set new end time
+                endTime = Date.now() + (AIRDROP_INTERVAL * 1000);
+                localStorage.setItem('silverBankAirdropEnd', endTime);
+            }
+
+            const display = document.getElementById('timerDisplay');
+
+            function updateTimer() {
+                const now = Date.now();
+                const remaining = Math.max(0, parseInt(endTime) - now);
+                
+                if (remaining === 0) {
+                    // Reset timer
+                    endTime = Date.now() + (AIRDROP_INTERVAL * 1000);
+                    localStorage.setItem('silverBankAirdropEnd', endTime);
+                }
+
+                const secondsLeft = Math.floor(remaining / 1000);
+                const minutes = Math.floor(secondsLeft / 60);
+                const seconds = secondsLeft % 60;
+
+                const formattedMinutes = minutes.toString().padStart(2, '0');
+                const formattedSeconds = seconds.toString().padStart(2, '0');
+
+                display.textContent = `${formattedMinutes}:${formattedSeconds}`;
+            }
+
+            // Update immediately then every second
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        // Copy contract functionality
+        function copyContract() {
+            const address = document.getElementById('contractAddress').innerText;
+            navigator.clipboard.writeText(address).then(() => {
+                const copyText = document.getElementById('copyText');
+                const originalText = copyText.innerText;
+                copyText.innerText = 'Copied!';
+                
+                setTimeout(() => {
+                    copyText.innerText = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Randomize properties
+                const size = Math.random() * 5 + 2;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 15 + 10;
+                const delay = Math.random() * 10;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}vw`;
+                particle.style.top = `100vh`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${delay}s`;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            startTimer();
+            createParticles();
+        });
+    </script>
+</body>
+</html>
